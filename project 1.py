@@ -6,15 +6,14 @@ This is a temporary script file.
 
 
 """
-
-#Import necessary packages
-import tensorflow as tf
-import numpy as np
+# Import Libraries
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from tensorflow import keras
+from tensorflow.keras import layers
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-import datetime
-import os
 
 #1. Read CSV data
 file_path = r"C:\Users\naufa\OneDrive - Universiti Kebangsaan Malaysia\Desktop\shrdc ai technologist\deep learning\module\heart disease\heart.csv"
@@ -22,7 +21,9 @@ heart_data = pd.read_csv(file_path)
 
 #2. The id column is not useful as a feature, so remove it
 #There is a column with all NaN value, remove it
-heart_data = heart_data.drop(['id',"Unnamed: 32"],axis=1)
+X = heart_data.drop(columns=['target'])
+y = heart_data['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 #3. Split the data into features and label
 heart_features = heart_data.copy()
